@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+{% block head %}
+    <head>
+        <meta charset=utf-8>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Welcome{% endblock %} | Avery House</title>
+    </head>
+{% endblock %}
+    <body>
+        <section class="section">
+            <div class="container">
+                {% block body %}
+                {% endblock %}
+            </div>
+        </section>
+    </body>
+</html>
