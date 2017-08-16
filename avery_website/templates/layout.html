@@ -2,6 +2,9 @@
 <html>
 {% block head %}
     <head>
+        {% assets 'css_all' %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}" type="text/css" />
+        {% endassets %}
         <meta charset=utf-8>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Welcome{% endblock %} | Avery House</title>
