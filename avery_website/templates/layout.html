@@ -1,21 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-{% block head %}
     <head>
-        {% assets 'css_all' %}
-        <link rel="stylesheet" href="{{ ASSET_URL }}" type="text/css" />
-        {% endassets %}
-        <meta charset=utf-8>
+        {% block head %}
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Welcome{% endblock %} | Avery House</title>
+        <title>{% block title %}Welcome{% endblock %} | Avery</title>
+        <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        {% assets 'css_all' %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}">
+        {% endassets %}
+        {% endblock %}
     </head>
-{% endblock %}
     <body>
-        <section class="section">
-            <div class="container">
-                {% block body %}
-                {% endblock %}
-            </div>
-        </section>
+    <nav class="navbar">
+      <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="http://bulma.io">
+          <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+        </a>
+
+        <div class="navbar-burger burger" data-target="navMenubd-example">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div id="navMenubd-example" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="{{ url_for('main.gallery') }}">
+            Gallery
+          </a>
+          <a class="navbar-item" href="http://bulma.io/blog/">
+            Calendar
+          </a>
+          <a class="navbar-item" href="http://bulma.io/expo/">
+            Government
+          </a>
+          <a class="navbar-item" href="http://bulma.io/love/">
+            Tools
+          </a>
+        </div>
+      </div>
+      </div>
+    </nav>
+    {% block body %}
+    {% endblock %}
     </body>
-</html>

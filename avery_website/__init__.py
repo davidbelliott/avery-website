@@ -8,8 +8,8 @@ def create_app():
     app.config.from_pyfile('config.py')
 
     assets = Environment(app)
-    assets.append_path(os.path.join(os.path.dirname(__file__), 'sass'))
-    css = Bundle('milligram.sass',
+    assets.append_path(os.path.join(os.path.dirname(__file__), 'assets', 'sass'))
+    css = Bundle('all.sass',
             filters='sass',
             output='all.css')
     assets.register('css_all', css)
