@@ -1,33 +1,16 @@
 @charset "utf-8"
-/*! bulma.io v0.5.1 | MIT License | github.com/jgthms/bulma */
-// 1. Import the initial variables
-@import url('https://fonts.googleapis.com/css?family=Noto+Serif')
-@import "../../node_modules/bulma/sass/utilities/initial-variables.sass"
-// 2. Set your own initial variables
-// Update blue
-$maroon: #6d3636
-$maroon-invert: #fff
+@import "../../node_modules/milligram/src/milligram.sass"
+@import url('https://fonts.googleapis.com/css?family=Spectral:i')
 
-$family-serif: "Noto-Serif", serif
+body
+    width: 87.5%
+    margin-left: auto
+    margin-right: auto
+    max-width: 1400px
+    color: #111
+    background-color: #fffff8
+    font-family: "Spectral", serif
+    font-size: 2.0rem
 
-
-
-
-
-$size-small: $size-4 !default
-$size-normal: $size-3 !default
-$size-medium: $size-2 !default
-$size-large: $size-1 !default
-
-
-$sizes: $size-1 $size-1 $size-1 $size-1 $size-1 $size-1
-
-// 3. Set the derived variables
-// Use the new pink as the primary color
-$primary: $maroon
-$primary-invert: $maroon-invert
-// Use the new serif family
-$family-primary: $family-serif
-$body-family: $family-serif
-
-@import "../../node_modules/bulma/bulma"
+h2
+    font-style: italic
