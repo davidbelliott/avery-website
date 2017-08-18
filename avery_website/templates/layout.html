@@ -11,6 +11,21 @@
         {% endblock %}
     </head>
     <body>
-    {% block body %}
-    {% endblock %}
+        <main class="wrapper">
+            <div class='navbar'>
+                <div class="container">
+                    <ul>
+                        <li><a href="{{ url_for('main.index') }}"><img src="{{ url_for('static', filename='logo_white.svg')}} "></a></li>
+                        <li><a href="{{ url_for('main.gallery') }}">Gallery</a></li>
+                        <li><a href="{{ url_for('main.calendar') }}">Calendar</a></li>
+                        <li><a href="{{ url_for('main.government') }}">Government</a></li>
+                        <div class="float-right">
+                        <li><a href="{{ url_for('main.index') }}">Login</a></div></li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            {% block body %}
+            {% endblock %}
+        </main>
     </body>

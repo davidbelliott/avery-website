@@ -8,15 +8,15 @@ def index():
 
 @main.route('/gallery')
 def gallery():
-    return 'This is the gallery'
+    return render_template('gallery.html')
 
 @main.route('/calendar')
 def calendar():
-    return 'This is the calendar'
+    return render_template('calendar.html')
 
 @main.route('/government')
 def government():
-    return 'This is the government page'
+    return render_template('government.html')
 
 @main.route('/tools')
 def tools():

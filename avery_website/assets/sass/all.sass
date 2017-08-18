@@ -1,16 +1,59 @@
 @charset "utf-8"
+
+
+@import "../../node_modules/milligram/src/Color"
+
+$color-secondary: #ffffff
+$color-primary: #B84544
 @import "../../node_modules/milligram/src/milligram.sass"
-@import url('https://fonts.googleapis.com/css?family=Spectral:i')
+@import url('https://fonts.googleapis.com/css?family=Spectral')
 
 body
-    width: 87.5%
-    margin-left: auto
-    margin-right: auto
-    max-width: 1400px
-    color: #111
-    background-color: #fffff8
+    margin: 0
+    background-color: $color-primary
+    color: $color-secondary
     font-family: "Spectral", serif
     font-size: 2.0rem
 
 h2
     font-style: italic
+
+.container
+    max-width: 80rem
+
+.wrapper>.container
+    padding-bottom: 10rem
+    padding-top: 10rem
+
+.navbar
+    width: 100%
+    padding-top: 5rem
+    background-color: $color-primary
+    color: $color-secondary
+
+.navbar ul
+    border-bottom: 1px solid $color-secondary
+    list-style-type: none
+    margin: 0
+    padding: 0
+    overflow: hidden
+
+.navbar li
+    float: left
+    margin: 0
+
+.navbar li a
+    display: block
+    text-align: center
+    padding: 14px 16px
+    text-decoration: none
+    color: $color-secondary
+
+.navbar li img
+    padding-right: 32px
+    vertical-align: middle
+    max-height: 30px
+
+.navbar.active li a 
+    color: $color-primary
+    background: $color-secondary
