@@ -2,10 +2,14 @@
 {% block body %}
     <div class="container" id="gallery_div" onload="getAlbum">
     {% for album in albums.data %}
-    <!--<a href={{ url_for('main.album', album_id=album.id) }}>-->
-            <p>{{ album.name }}</p>
-            <img src={{ album.cover_photo.images[album.cover_photo.medium_index].source }}>
-            <!--</a>-->
+        <div class="row">
+            <div class="column">
+        <!--<a href={{ url_for('main.album', album_id=album.id) }}>-->
+                <h2>{{ album.name }}</h2>
+                <img class="album" src={{ album.cover_photo.images[album.cover_photo.medium_index].source }}>
+                <!--</a>-->
+            </div>
+        </div>
     {% endfor %}
     </div>
 {% endblock %}
