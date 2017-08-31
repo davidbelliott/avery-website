@@ -19,7 +19,7 @@ def gallery():
     for album in albums['data']:
         album['cover_photo']['medium_index'] = min(IMAGE_SIZE_INDEX, len(album['cover_photo']['images']) - 1)
     print(albums)
-    return render_template('gallery.html', albums=albums)
+    return render_template('gallery.html', albums=[album for album in albums['data'] if album['name'] != 'Profile Pictures' and album['name'] != 'Cover Photos'])
 
 @main.route('/gallery/album/<album_id>')
 def album(album_id):
