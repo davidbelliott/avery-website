@@ -24,8 +24,13 @@ def gallery():
     return render_template('gallery.html', albums=[album for album in albums['data'] if album['name'] != 'Profile Pictures' and album['name'] != 'Cover Photos'])
 
 @main.route('/gallery/album/<album_id>')
-def album(album_id):
-    return 'Album ' + album_id
+def gallery_album(album_id):
+    album = graph.get_object(id=album_id, fields='name, photos{images}')
+    print(album)
+    for photo in album['photos']['data']:
+        photo['medium_index'] = min(IMAGE_SIZE_INDEX, len(photo['images']) - 1)
+    print(album)
+    return render_template('album.html', album=album)
 
 @main.route('/calendar')
 def calendar():

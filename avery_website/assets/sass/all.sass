@@ -3,24 +3,26 @@
 
 @import "../../node_modules/milligram/src/Color"
 
-$color-primary: #111111
 //$color-primary: #650201
-$color-secondary: #f8f0f0
-$color-accent: #9d0000
+$color-secondary: #4e191c
+$color-primary: #892c32
+$color-bg: #fcf6f6
 @import "../../node_modules/milligram/src/milligram.sass"
 @import url('https://fonts.googleapis.com/css?family=Spectral')
 @import url('https://fonts.googleapis.com/css?family=Montserrat:500')
 
 body
     margin: 0
-    background-color: $color-secondary
-    color: $color-primary
     font-family: "Spectral", serif
     font-size: 2.0rem
+    background-color: $color-bg
+
+h1
+    font-size: 3rem
 
 h2
     font-style: italic
-    font-size: 2.8rem
+    font-size: inherit
 
 .container
     max-width: 80rem
@@ -38,10 +40,16 @@ h2
     p
         margin-bottom: 0.5rem
 
+.button
+    border-radius: 0
+    font-weight: inherit
+    line-height: inherit
+    height: inherit
+
+
 .navbar
     width: 100%
-    background-color: $color-secondary
-    color: $color-primary
+    background-color: $color-bg
 
     a
         font-family: Montserrat, sans-serif
@@ -49,7 +57,6 @@ h2
         letter-spacing: 0.1rem
         text-transform: uppercase
         margin: 1rem 0
-        color: $color-primary
 
 
     ul
@@ -64,22 +71,10 @@ h2
         margin-bottom: 0
         text-align: center
 
-    .button
-        margin-top: 1rem
-
 .navbar-fixed-top
     z-index: 1
     position: fixed
     top: -.1rem
-
-
-a
-    color: $color-accent
-    text-decoration: none
-
-    &:focus,
-    &:hover
-        color: $color-accent
 
 .float-right
     margin-left: auto
@@ -89,41 +84,3 @@ a
 
 .social-logo
     max-height: 2rem
-
-.button,
-button,
-input[type='button'],
-input[type='reset'],
-input[type='submit']
-        font-family: "Montserrat", sans-serif
-        text-transform: uppercase
-        font-size: 1.4rem
-        font-weight: inherit
-        border-radius: 0
-        height: inherit
-        line-height: inherit
-
-        &.button-outline
-                background-color: transparent
-                color: $color-primary
-
-                &:focus,
-                &:hover
-                        background-color: $color-accent
-                        border-color: $color-accent
-                        color: $color-secondary
-
-                &[disabled]
-
-                        &:focus,
-                        &:hover
-                                border-color: inherit
-                                color: $color-primary
-
-        &.button-clear
-                &:focus,
-                &:hover
-                        background-color: transparent
-                        border-color: transparent
-                        color: $color-accent
-
