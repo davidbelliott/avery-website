@@ -1,15 +1,21 @@
 {% extends "layout.html" %}
 {% block body %}
-    <div class="container" id="gallery_div" onload="getAlbum">
-    {% for album in albums %}
-        <div class="row">
-            <div class="column">
-        <!--<a href={{ url_for('main.album', album_id=album.id) }}>-->
-                <h2>{{ album.name }}</h2>
-                <img class="album" src={{ album.cover_photo.images[album.cover_photo.medium_index].source }}>
-                <!--</a>-->
-            </div>
+<div class="container">
+    <h1>Gallery</h1>
+    {% for album_row in albums | batch(2) %}
+    <div class="row">
+        {% for album in album_row %}
+        <div class="column">
+            <a href={{ url_for('main.album', album_id=album.id) }}>
+                <div class="album">
+                    <p>{{ album.name_stripped }}</p>
+                    <img src={{ album.cover_photo.images[album.cover_photo.medium_index].source }}>
+                </div>
+                <!--<div class="caption">{{ album.name }}</div>-->
+            </a>
         </div>
-    {% endfor %}
+        {% endfor %}
     </div>
+    {% endfor %}
+</div>
 {% endblock %}

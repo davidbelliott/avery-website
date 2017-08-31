@@ -5,8 +5,8 @@
 
 $color-primary: #111111
 //$color-primary: #650201
-$color-secondary: #fffff8
-$color-accent: #650201
+$color-secondary: #f8f0f0
+$color-accent: #9d0000
 @import "../../node_modules/milligram/src/milligram.sass"
 @import url('https://fonts.googleapis.com/css?family=Spectral')
 @import url('https://fonts.googleapis.com/css?family=Montserrat:500')
@@ -18,82 +18,88 @@ body
     font-family: "Spectral", serif
     font-size: 2.0rem
 
-//h2
-    //font-style: italic
+h2
+    font-style: italic
+    font-size: 2.8rem
 
 .container
     max-width: 80rem
 
+.container-center
+    text-align: center
+
 .wrapper>.container
-    padding-bottom: 15rem
-    padding-top: 15rem
+    padding-bottom: 5rem
+    padding-top: 5rem
+
+.album
+    margin-top: 1rem
+
+    p
+        margin-bottom: 0.5rem
 
 .navbar
     width: 100%
-    position: fixed
-    z-index: 1
     background-color: $color-secondary
     color: $color-primary
-    font-family: "Montserrat", sans-serif
-    text-transform: uppercase
-    font-size: 1.4rem
-    letter-spacing: .1rem
 
-.navbar ul
-    border-bottom: 1px solid $color-primary
-    display: flex
-    align-items: center
-    list-style-type: none
-    margin: 0
-    padding: 0
-    overflow: hidden
+    a
+        font-family: Montserrat, sans-serif
+        font-size: 1.4rem
+        letter-spacing: 0.1rem
+        text-transform: uppercase
+        margin: 1rem 0
+        color: $color-primary
 
-.navbar li
-    float: left
-    margin: 0
 
-.navbar li a
-    display: block
-    text-align: center
-    padding: 7px 8px
-    margin: 7px 8px
-    text-decoration: none
-    color: $color-primary
-    &:focus,
-    &:hover
-        color: $color-accent
+    ul
+        list-style-type: none
 
-.navbar li img
-    vertical-align: middle
+    .row
+        border-top: .1rem solid $color-primary
+        border-bottom: .1rem solid $color-primary
+        margin-bottom: 0
 
-.navbar.active li a 
-    color: $color-primary
-    background: $color-secondary
+    .column
+        margin-bottom: 0
+        text-align: center
+
+    .button
+        margin-top: 1rem
+
+.navbar-fixed-top
+    z-index: 1
+    position: fixed
+    top: -.1rem
+
 
 a
     color: $color-accent
     text-decoration: none
 
-.album
-    margin-bottom: 2em
+    &:focus,
+    &:hover
+        color: $color-accent
 
 .float-right
     margin-left: auto
 
 .brand-logo
-    max-height: 30px
+    height: 10rem
 
 .social-logo
-    max-height: 20px
+    max-height: 2rem
 
 .button,
 button,
 input[type='button'],
 input[type='reset'],
 input[type='submit']
-        border-radius: 0
-        font-size: inherit
+        font-family: "Montserrat", sans-serif
+        text-transform: uppercase
+        font-size: 1.4rem
         font-weight: inherit
+        border-radius: 0
         height: inherit
         line-height: inherit
 
@@ -103,9 +109,9 @@ input[type='submit']
 
                 &:focus,
                 &:hover
-                        background-color: transparent
+                        background-color: $color-accent
                         border-color: $color-accent
-                        color: $color-accent
+                        color: $color-secondary
 
                 &[disabled]
 
@@ -113,3 +119,11 @@ input[type='submit']
                         &:hover
                                 border-color: inherit
                                 color: $color-primary
+
+        &.button-clear
+                &:focus,
+                &:hover
+                        background-color: transparent
+                        border-color: transparent
+                        color: $color-accent
+
