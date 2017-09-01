@@ -2,7 +2,7 @@
 
 from avery_website import create_app
 
-if __name__ == '__main__'
+if __name__ == '__main__':
     app = create_app()
     app.debug = True
     port = int(os.environ.get("PORT", 5000))
