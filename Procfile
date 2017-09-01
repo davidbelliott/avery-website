@@ -1,1 +1,1 @@
-web: cd avery_website && gulp && cd ..; python run.py
+web: gulp; python run.py
