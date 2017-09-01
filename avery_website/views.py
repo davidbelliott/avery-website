@@ -43,3 +43,5 @@ def government():
 @main.route('/tools')
 def tools():
     return 'This is the tools page'
+
+@main.route('/login')

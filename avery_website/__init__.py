@@ -14,7 +14,9 @@ def create_app():
             output='all.css')
     assets.register('css_all', css)
 
-    from .views import main as main_bp
-    app.register_blueprint(main_bp)
+    from .views import main as main
+    app.register_blueprint(main)
+
+    from .extensions import login_manager
 
     return app
