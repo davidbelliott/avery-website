@@ -470,8 +470,8 @@ h2 {
   text-align: center; }
 
 .wrapper > .container {
-  padding-bottom: 5rem;
-  padding-top: 5rem; }
+  padding-bottom: 3rem;
+  padding-top: 3rem; }
 
 .album {
   margin-top: 1rem; }
@@ -494,14 +494,16 @@ h2 {
     text-transform: uppercase;
     margin: 1rem 0; }
   .navbar ul {
-    list-style-type: none; }
-  .navbar .row {
     border-top: 0.1rem solid #892c32;
     border-bottom: 0.1rem solid #892c32;
-    margin-bottom: 0; }
-  .navbar .column {
     margin-bottom: 0;
-    text-align: center; }
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center; }
+  .navbar li {
+    margin: 1rem; }
 
 .navbar-fixed-top {
   z-index: 1;
@@ -512,7 +514,7 @@ h2 {
   margin-left: auto; }
 
 .brand-logo {
-  height: 10rem; }
+  height: 8rem; }
 
 .social-logo {
   max-height: 2rem; }

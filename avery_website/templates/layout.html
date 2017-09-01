@@ -18,13 +18,13 @@
             </div>
             <div class="navbar">
                 <div class="container">
-                    <ul class="row row-center">
-                        <li class="column"><a href="{{ url_for('main.index') }}">Home</a></li>
-                        <li class="column"><a href="{{ url_for('main.gallery') }}">Gallery</a></li>
-                        <li class="column"><a href="{{ url_for('main.calendar') }}">Calendar</a></li>
-                        <li class="column"><a href="{{ url_for('main.government') }}">Government</a></li>
+                    <ul>
+                        <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                        <li><a href="{{ url_for('main.gallery') }}">Gallery</a></li>
+                        <li><a href="{{ url_for('main.calendar') }}">Calendar</a></li>
+                        <!--<li><a href="{{ url_for('main.government') }}">Government</a></li>-->
                         <!--<li class="column"><a href="https://facebook.com/averyglory"><img class="social-logo" src="{{ url_for('static', filename='fb_logo.svg') }}"></a></li>-->
-                        <li class="column"><a class="button button-outline" href="{{ url_for('main.index') }}">Login</a></li>
+                        <li><a href="{{ url_for('main.index') }}">Login</a></li>
                     </ul>
                 </div>
             </div>
