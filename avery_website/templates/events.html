@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
-{% block title %}Calendar{% endblock %}
+{% block title %}Events{% endblock %}
 {% block body %}
     <div class="container">
-            <h1>Calendar</h1>
+            <h1>Upcoming Events</h1>
             <ul>
             {% for event in events %}
             <li>{{ event['summary'] }}</li>

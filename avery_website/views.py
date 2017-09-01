@@ -62,8 +62,8 @@ def gallery_album(album_id):
     print(album)
     return render_template('album.html', album=album)
 
-@main.route('/calendar')
-def calendar():
+@main.route('/events')
+def events():
     credentials = google_get_credentials()
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('calendar', 'v3', http=http)
@@ -81,7 +81,7 @@ def calendar():
         start = event['start'].get('dateTime', event['start'].get('date'))
         print(start, event['summary'])
 
-    return render_template('calendar.html', events=events)
+    return render_template('events.html', events=events)
 
 @main.route('/government')
 def government():
