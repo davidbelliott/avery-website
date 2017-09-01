@@ -1,1 +1,3 @@
-web: python run.py
+web:
+    gulp
+    python run.py
