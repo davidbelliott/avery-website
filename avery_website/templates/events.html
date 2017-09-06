@@ -3,10 +3,14 @@
 {% block body %}
     <div class="container">
             <h1>Upcoming Events</h1>
-            <ul>
             {% for event in events %}
-            <li>{{ event['summary'] }}</li>
+            <p><b>{{ event['summary'] }}</b>: 
+            {% if event.start.date %}
+                {{ event.start.date }}
+            {% else %}
+                {{ event.start.dateTime }}
+            {% endif %}</p>
+            <p>{{ event['description'] }}</p>
             {% endfor %}
-            </ul>
         </div>
 {% endblock %}
