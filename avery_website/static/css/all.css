@@ -499,11 +499,12 @@ h2 {
     margin-bottom: 0;
     list-style-type: none;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
-    justify-content: center; }
+    overflow: auto; }
   .navbar li {
-    margin: 1rem; }
+    margin: 0 auto;
+    padding: 1rem; }
 
 .navbar-fixed-top {
   z-index: 1;
