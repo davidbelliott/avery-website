@@ -11,4 +11,4 @@ gulp.task('sass:watch', function() {
     gulp.watch('./avery_website/assets/sass/*.sass', ['sass']);
 });
 
-gulp.task('default', ['sass:watch']);
+gulp.task('default', ['sass', 'sass:watch']);
