@@ -9,6 +9,7 @@ from oauth2client import tools as tools
 from oauth2client.file import Storage
 
 import datetime
+import udatetime
 
 from flask import Blueprint, render_template, current_app
 
@@ -75,10 +76,28 @@ def events():
         orderBy='startTime').execute()
     events = eventsResult.get('items', [])
 
-    if not events:
-        print('No upcoming events found.')
     for event in events:
-        start = event['start'].get('dateTime', event['start'].get('date'))
+        all_day = bool(event['start'].get('date'))
+        start = udatetime.from_string(event['start'].get('dateTime', event['start'].get('date')))
+        end = udatetime.from_string(event['end'].get('dateTime', event['end'].get('date')))
+
+        start_showdate = True
+        start_showtime = not all_day
+        end_showdate = end.year != start.year or end.month != start.month or end.day != start.day
+        end_showtime = not all_day
+
+        date_str = '%Y-%m-%d'
+        time_str = '%-H:%M %p'
+        sepr_str = ', '
+
+        start_format = date_str + (sepr_str + time_str) if start_showtime else ''
+        end_format = date_str if end_showdate else ''           \
+            + sepr_str if end_showdate and end_showtime else '' \
+            + time_str if end_showtime else ''
+
+        timedate_str = start.strftime(start_format) + (' - ' if end_format else '') + end.strftime(end_format)
+
+        event['timeDateStr'] = timedate_str
         print(start, event['summary'])
 
     return render_template('events.html', events=events)
