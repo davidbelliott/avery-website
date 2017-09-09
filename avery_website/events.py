@@ -16,4 +16,4 @@ def on_aaa():
 @socketio.on('get_all_tracks')
 def on_get_all_tracks():
     print("All tracks")
-    emit('new_tracks', ['yt:https://www.youtube.com/watch?v=WYQ95pJFsiE', 'b', 'c'])
+    emit('new_tracks', ['sc:https://soundcloud.com/thysnoisia/movement-i', 'b', 'c'])

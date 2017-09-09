@@ -104,3 +104,7 @@ def events():
 @app.route('/government')
 def government():
     return render_template('government.html')
+
+@app.route('/music')
+def music():
+    return render_template('music.html')
