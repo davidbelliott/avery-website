@@ -11,8 +11,10 @@ from oauth2client import tools as tools
 from oauth2client.file import Storage
 
 from .app import app
+from .events import socketio
+from .forms import MusicSubmitForm
 
-from flask import render_template
+from flask import render_template, redirect, url_for
 
 def google_get_credentials():
     """Gets valid user credentials from storage.
@@ -105,6 +107,11 @@ def events():
 def government():
     return render_template('government.html')
 
-@app.route('/music')
+@app.route('/music', methods=["GET", "POST"])
 def music():
-    return render_template('music.html')
+    form = MusicSubmitForm()
+    if form.validate_on_submit():
+        socketio.emit('new_tracks', [form.url.data])
+        print('Sent new_tracks')
+        return redirect(url_for('music'))
+    return render_template('music.html', form=form)

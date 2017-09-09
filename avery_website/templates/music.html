@@ -3,5 +3,9 @@
     <div class="container">
         <h1>Dinner music queue</h1>
         <h2>Paste the URL of a Youtube video or a Soundcloud or Spotify track</h2>
+        <form action="" method="post">
+            {{ form.url }}
+            {{ form.csrf_token }}
+        </form>
     </div>
 {% endblock %}
