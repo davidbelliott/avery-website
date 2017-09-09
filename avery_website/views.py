@@ -2,18 +2,17 @@ import facebook
 import re
 import httplib2
 import os
+import datetime
+import udatetime
 
 from apiclient import discovery
 from oauth2client import client
 from oauth2client import tools as tools
 from oauth2client.file import Storage
 
-import datetime
-import udatetime
+from .app import app
 
-from flask import Blueprint, render_template, current_app
-
-main = Blueprint('main', __name__)
+from flask import render_template
 
 def google_get_credentials():
     """Gets valid user credentials from storage.
@@ -32,38 +31,38 @@ def google_get_credentials():
     store = Storage(credential_path)
     credentials = store.get()
     if not credentials or credentials.invalid:
-        flow = client.flow_from_clientsecrets(current_app.config['GOOGLE_CLIENT_SECRET_FILE'], current_app.config['GOOGLE_SCOPES'])
-        flow.user_agent = current_app.config['GOOGLE_APPLICATION_NAME']
+        flow = client.flow_from_clientsecrets(app.config['GOOGLE_CLIENT_SECRET_FILE'], app.config['GOOGLE_SCOPES'])
+        flow.user_agent = app.config['GOOGLE_APPLICATION_NAME']
         flow.params['access_type'] = 'offline'
         credentials = tools.run_flow(flow, store)
         print('Storing credentials to ' + credential_path)
     return credentials
 
-@main.route('/')
+@app.route('/')
 def index():
     return render_template('index.html')
 
-@main.route('/gallery')
+@app.route('/gallery')
 def gallery():
-    graph = facebook.GraphAPI(current_app.config['FACEBOOK_APP_ID'] + '|' + current_app.config['FACEBOOK_APP_SECRET'])
+    graph = facebook.GraphAPI(app.config['FACEBOOK_APP_ID'] + '|' + app.config['FACEBOOK_APP_SECRET'])
     albums = graph.get_object(id='averyglory/albums', fields='name,cover_photo{images}')
     for album in albums['data']:
-        album['cover_photo']['medium_index'] = min(current_app.config['FACEBOOK_IMAGE_SIZE_INDEX'], len(album['cover_photo']['images']) - 1)
+        album['cover_photo']['medium_index'] = min(app.config['FACEBOOK_IMAGE_SIZE_INDEX'], len(album['cover_photo']['images']) - 1)
         album['name_stripped'] = re.sub("\[([^]]+)\]", "", album['name'])
     print(albums)
     return render_template('gallery.html', albums=[album for album in albums['data'] if album['name'] != 'Profile Pictures' and album['name'] != 'Cover Photos'])
 
-@main.route('/gallery/album/<album_id>')
+@app.route('/gallery/album/<album_id>')
 def gallery_album(album_id):
-    graph = facebook.GraphAPI(current_app.config['FACEBOOK_APP_ID'] + '|' + current_app.config['FACEBOOK_APP_SECRET'])
+    graph = facebook.GraphAPI(app.config['FACEBOOK_APP_ID'] + '|' + app.config['FACEBOOK_APP_SECRET'])
     album = graph.get_object(id=album_id, fields='name, photos{images}')
     print(album)
     for photo in album['photos']['data']:
-        photo['medium_index'] = min(current_app.config['FACEBOOK_IMAGE_SIZE_INDEX'], len(photo['images']) - 1)
+        photo['medium_index'] = min(app.config['FACEBOOK_IMAGE_SIZE_INDEX'], len(photo['images']) - 1)
     print(album)
     return render_template('album.html', album=album)
 
-@main.route('/events')
+@app.route('/events')
 def events():
     credentials = google_get_credentials()
     http = credentials.authorize(httplib2.Http())
@@ -102,6 +101,6 @@ def events():
 
     return render_template('events.html', events=events)
 
-@main.route('/government')
+@app.route('/government')
 def government():
     return render_template('government.html')
