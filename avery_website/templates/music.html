@@ -2,10 +2,25 @@
 {% block body %}
     <div class="container">
         <h1>Dinner music queue</h1>
-        <h2>Paste the URL of a Youtube video or a Soundcloud or Spotify track</h2>
+        {% if online %}
+        <p>Paste the URL of a Youtube video or a Soundcloud or Spotify track</p>
         <form action="" method="post">
             {{ form.url }}
             {{ form.csrf_token }}
         </form>
+        <table>
+            <tbody>
+            {% for track in playlist | reverse %}
+                <tr><td>
+                {% if track.pos == pos %}<b>{% endif %}
+                {% if track.artist %}{{ track.artist }} - {% endif %}{{ track.title }}
+                {% if track.pos == pos %}</b>{% endif %}
+                </td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>The music server is not currently online. Please try again later.</p>
+        {% endif %}
     </div>
 {% endblock %}

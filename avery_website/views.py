@@ -4,13 +4,14 @@ import httplib2
 import os
 import datetime
 import udatetime
+import json
 
 from apiclient import discovery
 from oauth2client import client
 from oauth2client import tools as tools
 from oauth2client.file import Storage
 
-from .app import app
+from .app import app, redis
 from .events import socketio
 from .forms import MusicSubmitForm
 
@@ -111,7 +112,14 @@ def government():
 def music():
     form = MusicSubmitForm()
     if form.validate_on_submit():
+        redis.rpush('tracks', form.url.data)
+        print(redis.lrange('tracks', 0, -1))
         socketio.emit('new_tracks', [form.url.data])
         print('Sent new_tracks')
         return redirect(url_for('music'))
-    return render_template('music.html', form=form)
+    raw = redis.get('playlist')
+    utf8 = raw.decode("utf-8")
+    js = json.loads(utf8)
+    pos = redis.get('pos').decode("utf-8")
+    print(pos)
+    return render_template('music.html', form=form, online=redis.get('music_server_online'), playlist=js, pos=pos)
