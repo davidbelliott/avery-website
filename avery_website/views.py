@@ -118,8 +118,15 @@ def music():
         print('Sent new_tracks')
         return redirect(url_for('music'))
     raw = redis.get('playlist')
-    utf8 = raw.decode("utf-8")
-    js = json.loads(utf8)
-    pos = redis.get('pos').decode("utf-8")
-    print(pos)
+    if(raw):
+        utf8 = raw.decode("utf-8")
+        js = json.loads(utf8)
+    else:
+        js = []
+    pos_raw = redis.get('pos')
+    if(pos_raw):
+        pos = pos_raw.decode("utf-8")
+        print(pos)
+    else:
+        pos = "-1"
     return render_template('music.html', form=form, online=redis.get('music_server_online'), playlist=js, pos=pos)
