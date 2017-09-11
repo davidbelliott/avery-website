@@ -130,4 +130,5 @@ def music():
         print(pos)
     else:
         pos = "-1"
-    return render_template('music.html', form=form, online=redis.get('music_server_online'), playlist=js, pos=pos)
+    online = bool(int(redis.get('music_server_online')))
+    return render_template('music.html', form=form, online=online, playlist=js, pos=pos)
