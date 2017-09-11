@@ -5,10 +5,10 @@ var uncss = require('gulp-uncss');
 gulp.task('sass', function() {
     return gulp.src('./avery_website/assets/sass/*.sass')
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-        .pipe(uncss({
+        /*.pipe(uncss({
             html: ['./avery_website/templates/*.html'],
             ignore: ['\.navbar-fixed-top']
-        }))
+        }))*/
         .pipe(gulp.dest('./avery_website/static/css'));
 });
 
