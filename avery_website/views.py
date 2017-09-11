@@ -60,6 +60,7 @@ def gallery_album(album_id):
     graph = facebook.GraphAPI(app.config['FACEBOOK_APP_ID'] + '|' + app.config['FACEBOOK_APP_SECRET'])
     album = graph.get_object(id=album_id, fields='name, photos{images}')
     print(album)
+    album['name_stripped'] = re.sub("\[([^]]+)\]", "", album['name'])
     for photo in album['photos']['data']:
         photo['medium_index'] = min(app.config['FACEBOOK_IMAGE_SIZE_INDEX'], len(photo['images']) - 1)
     print(album)

@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
-{% block title %}{{ album.name }}{% endblock %}
+{% block title %}{{ album.name_stripped }}{% endblock %}
 {% block body %}
 <div class="container">
-    <h1>{{ album.name }}</h1>
+    <h1>{{ album.name_stripped }}</h1>
     {% for photo_row in album['photos']['data'] | batch(2) %}
     <div class="row">
         {% for photo in photo_row %}
