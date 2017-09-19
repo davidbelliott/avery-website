@@ -1,2 +1,2 @@
 #!/bin/sh
-uwsgi --ini avery-website-debug.ini
+uwsgi --ini avery-website.ini
