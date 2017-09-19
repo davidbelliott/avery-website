@@ -5,6 +5,7 @@ facebook-sdk==2.0.0
 Flask==0.12.2
 Flask-Login==0.4.0
 Flask-SocketIO==2.9.2
+Flask-WTF==0.14.2
 gevent==1.2.2
 gevent-websocket==0.10.1
 google-api-python-client==1.6.3
@@ -33,3 +34,4 @@ urllib3==1.22
 uWSGI==2.0.15
 webassets==0.12.1
 Werkzeug==0.12.2
+WTForms==2.1
