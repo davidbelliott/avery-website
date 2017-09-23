@@ -89,8 +89,8 @@ def events():
         end_showdate = end.year != start.year or end.month != start.month or end.day != start.day
         end_showtime = not all_day
 
-        date_str = '%Y-%m-%d'
-        time_str = '%-H:%M %p'
+        date_str = '%A %Y-%m-%d'
+        time_str = '%-H:%M'
         sepr_str = ', '
 
         start_format = date_str + (sepr_str + time_str) if start_showtime else ''
