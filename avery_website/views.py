@@ -80,9 +80,15 @@ def events():
     events = eventsResult.get('items', [])
 
     for event in events:
-        all_day = bool(event['start'].get('date'))
-        start = udatetime.from_string(event['start'].get('dateTime', event['start'].get('date')))
-        end = udatetime.from_string(event['end'].get('dateTime', event['end'].get('date')))
+        start_date = event['start'].get('date')
+        end_date = event['end'].get('date')
+        all_day = bool(start_date)
+        if all_day:
+            start = datetime.datetime.strptime(start_date, "%Y-%m-%d")
+            end = datetime.datetime.strptime(end_date, "%Y-%m-%d")
+        else:
+            start = udatetime.from_string(event['start'].get('dateTime', event['start'].get('date')))
+            end = udatetime.from_string(event['end'].get('dateTime', event['end'].get('date')))
 
         start_showdate = True
         start_showtime = not all_day
@@ -93,7 +99,7 @@ def events():
         time_str = '%-H:%M'
         sepr_str = ', '
 
-        start_format = date_str + (sepr_str + time_str) if start_showtime else ''
+        start_format = date_str + ((sepr_str + time_str) if start_showtime else '')
         end_format = date_str if end_showdate else ''           \
             + sepr_str if end_showdate and end_showtime else '' \
             + time_str if end_showtime else ''
