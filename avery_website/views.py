@@ -141,7 +141,8 @@ def music():
             print(pos)
         else:
             pos = "-1"
-        online = bool(int(strictredis.get('music_server_online')))
+	online_raw = strictredis.get('music_server_online')
+	online = not online_raw is None and bool(int(online_raw))
     except redis.exceptions.ConnectionError:
         online = False
     return render_template('music.html', form=form, online=online, playlist=js, pos=pos)
