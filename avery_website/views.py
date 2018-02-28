@@ -5,13 +5,14 @@ import os
 import datetime
 import udatetime
 import json
+import redis
 
 from apiclient import discovery
 from oauth2client import client
 from oauth2client import tools as tools
 from oauth2client.file import Storage
 
-from .app import app, redis
+from .app import app, strictredis
 from .events import socketio
 from .forms import MusicSubmitForm
 
@@ -118,23 +119,29 @@ def government():
 @app.route('/music', methods=["GET", "POST"])
 def music():
     form = MusicSubmitForm()
-    if form.validate_on_submit():
-        redis.rpush('tracks', form.url.data)
-        print(redis.lrange('tracks', 0, -1))
-        socketio.emit('new_tracks', [form.url.data])
-        print('Sent new_tracks')
-        return redirect(url_for('music'))
-    raw = redis.get('playlist')
-    if(raw):
-        utf8 = raw.decode("utf-8")
-        js = json.loads(utf8)
-    else:
-        js = []
-    pos_raw = redis.get('pos')
-    if(pos_raw):
-        pos = pos_raw.decode("utf-8")
-        print(pos)
-    else:
-        pos = "-1"
-    online = bool(int(redis.get('music_server_online')))
+    online = False
+    js = ''
+    pos = 0
+    try:
+        if form.validate_on_submit():
+            strictredis.rpush('tracks', form.url.data)
+            print(strictredis.lrange('tracks', 0, -1))
+            socketio.emit('new_tracks', [form.url.data])
+            print('Sent new_tracks')
+            return redirect(url_for('music'))
+        raw = strictredis.get('playlist')
+        if(raw):
+            utf8 = raw.decode("utf-8")
+            js = json.loads(utf8)
+        else:
+            js = []
+        pos_raw = strictredis.get('pos')
+        if(pos_raw):
+            pos = pos_raw.decode("utf-8")
+            print(pos)
+        else:
+            pos = "-1"
+        online = bool(int(strictredis.get('music_server_online')))
+    except redis.exceptions.ConnectionError:
+        online = False
     return render_template('music.html', form=form, online=online, playlist=js, pos=pos)

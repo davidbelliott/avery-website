@@ -7,4 +7,4 @@ app.config.from_pyfile('config.py')
 
 socketio = SocketIO(app)
 
-redis = redis.StrictRedis(host='localhost', port=6379, db=0)
+strictredis = redis.StrictRedis(host='localhost', port=6379, db=0)
