@@ -8,7 +8,7 @@
         {% for album in album_row %}
         <div class="column">
             <div class="album">
-                <a href="{{ url_for('gallery_album', album_id=album.id) }}"><img src="{{ album.cover_photo.images[album.cover_photo.medium_index].source }}" alt=""></a><br>
+                <a href="{{ url_for('gallery_album', album_id=album.id) }}"><img class="gallery-img" src="{{ album.cover_photo.images[album.cover_photo.medium_index].source }}" alt=""></a><br>
                 <a class="caption" href="{{ url_for('gallery_album', album_id=album.id) }}">{{ album.name_stripped }}</a>
             </div>
         </div>
