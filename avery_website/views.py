@@ -114,7 +114,7 @@ def events():
 
 @app.route('/constitution')
 def constitution():
-    return render_template('constitution.html', constitution_path=app.config['CONSTITUTION_PATH'])
+    return render_template('constitution.html')
 
 @app.route('/music', methods=["GET", "POST"])
 def music():
@@ -141,8 +141,8 @@ def music():
             print(pos)
         else:
             pos = "-1"
-	online_raw = strictredis.get('music_server_online')
-	online = not online_raw is None and bool(int(online_raw))
+        online_raw = strictredis.get('music_server_online')
+        online = not online_raw is None and bool(int(online_raw))
     except redis.exceptions.ConnectionError:
         online = False
     return render_template('music.html', form=form, online=online, playlist=js, pos=pos)
