@@ -112,9 +112,9 @@ def events():
 
     return render_template('events.html', events=events)
 
-@app.route('/government')
-def government():
-    return render_template('government.html')
+@app.route('/constitution')
+def constitution():
+    return render_template('constitution.html', constitution_path=app.config['CONSTITUTION_PATH'])
 
 @app.route('/music', methods=["GET", "POST"])
 def music():
