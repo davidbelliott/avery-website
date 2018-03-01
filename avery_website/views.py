@@ -6,6 +6,7 @@ import datetime
 import udatetime
 import json
 import redis
+import subprocess
 
 from apiclient import discovery
 from oauth2client import client
@@ -115,6 +116,16 @@ def events():
 @app.route('/constitution')
 def constitution():
     return render_template('constitution.html')
+
+@app.route('/constitution/update', methods=["GET", "POST"])
+def constitution_update():
+    hook = app.config["CONSTITUTION_UPDATE_HOOK"]
+    if hook:
+        try:
+            subprocess.Popen(hook)
+        except FileNotFoundError:
+            pass
+    return redirect(url_for('constitution'))
 
 @app.route('/music', methods=["GET", "POST"])
 def music():
