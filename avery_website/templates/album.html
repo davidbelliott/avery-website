@@ -7,10 +7,9 @@
     <div class="row">
         {% for photo in photo_row %}
         <div class="column">
-                    <a href="{{ photo.images[0].source }}">
-                        <img class="gallery-img" src="{{ photo.images[photo.medium_index].source }}" alt="">
-                    </a>
-                <!--<div class="caption">{{ album.name }}</div>-->
+            <a href="{{ photo.images[0].source }}">
+                <img class="gallery-img" src="{{ photo.images[photo.medium_index].source }}" alt="">
+            </a>
         </div>
         {% endfor %}
     </div>

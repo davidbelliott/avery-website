@@ -8,7 +8,7 @@
         <title>{% block title %}Welcome{% endblock %} | Avery</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spectral">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:600">
         {% endblock %}
     </head>
     <body>
@@ -19,16 +19,13 @@
                 </a>
             </div>
             <div class="navbar">
-                <div class="container">
-                    <ul>
-                        <li><a href="{{ url_for('index') }}">Home</a></li>
-                        <li><a href="{{ url_for('gallery') }}">Gallery</a></li>
-                        <li><a href="{{ url_for('events') }}">Events</a></li>
-                        <li><a href="{{ url_for('constitution') }}">Constitution</a></li>
-                        <!--<li class="column"><a href="https://facebook.com/averyglory"><img class="social-logo" src="{{ url_for('static', filename='fb_logo.svg') }}"></a></li>-->
-                        <li><a href="{{ url_for('music') }}">Music</a></li>
-                        <!--<li><a href="{{ url_for('index') }}">Login</a></li>-->
-                    </ul>
+                <div class="container container-center">
+                    <a href="{{ url_for('index') }}">Home</a> |
+                    <a href="{{ url_for('gallery') }}">Gallery</a> |
+                    <a href="{{ url_for('events') }}">Events</a> |
+                    <a href="{{ url_for('constitution') }}">Constitution</a> |
+                    <a href="{{ url_for('music') }}">Music</a>
+                    <!--<li><a href="{{ url_for('index') }}">Login</a></li>-->
                 </div>
             </div>
             {% block body %}
