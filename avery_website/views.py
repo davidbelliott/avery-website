@@ -1,47 +1,23 @@
-import facebook
 import re
-import httplib2
+import facebook
 import os
 import datetime
 import udatetime
 import json
 import redis
 import subprocess
+from . import gcal
 
-from apiclient import discovery
+'''from apiclient import discovery
 from oauth2client import client
 from oauth2client import tools as tools
-from oauth2client.file import Storage
+from oauth2client.file import Storage'''
 
 from .app import app, strictredis
 from .events import socketio
 from .forms import MusicSubmitForm
 
-from flask import render_template, redirect, url_for
-
-def google_get_credentials():
-    """Gets valid user credentials from storage.
-
-    If nothing has been stored, or if the stored credentials are invalid,
-    the OAuth2 flow is completed to obtain the new credentials.
-
-    Returns:
-        Credentials, the obtained credential.
-    """
-    credential_dir = 'instance/credentials'
-    if not os.path.exists(credential_dir):
-        os.makedirs(credential_dir)
-    credential_path = os.path.join(credential_dir, 'avery_website.json')
-
-    store = Storage(credential_path)
-    credentials = store.get()
-    if not credentials or credentials.invalid:
-        flow = client.flow_from_clientsecrets(app.config['GOOGLE_CLIENT_SECRET_FILE'], app.config['GOOGLE_SCOPES'])
-        flow.user_agent = app.config['GOOGLE_APPLICATION_NAME']
-        flow.params['access_type'] = 'offline'
-        credentials = tools.run_flow(flow, store)
-        print('Storing credentials to ' + credential_path)
-    return credentials
+from flask import render_template, redirect, url_for, request
 
 @app.route('/')
 def index():
@@ -49,37 +25,29 @@ def index():
 
 @app.route('/gallery')
 def gallery():
-    graph = facebook.GraphAPI(app.config['FACEBOOK_APP_ID'] + '|' + app.config['FACEBOOK_APP_SECRET'])
+    graph = facebook.GraphAPI(access_token = app.config['FACEBOOK_PAGE_ACCESS_TOKEN'])
     albums = graph.get_object(id='averyglory/albums', fields='name,cover_photo{images}')
     for album in albums['data']:
-        album['cover_photo']['medium_index'] = min(app.config['FACEBOOK_IMAGE_SIZE_INDEX'], len(album['cover_photo']['images']) - 1)
+        if 'cover_photo' in album:
+            album['cover_photo']['medium_index'] = min(app.config['FACEBOOK_IMAGE_SIZE_INDEX'], len(album['cover_photo']['images']) - 1)
         album['name_stripped'] = re.sub("\[([^]]+)\]", "", album['name'])
     print(albums)
-    return render_template('gallery.html', albums=[album for album in albums['data'] if album['name'] != 'Profile Pictures' and album['name'] != 'Cover Photos'])
+    return render_template('gallery.html', albums=[album for album in albums['data'] if album['name'] != 'Profile Pictures' and album['name'] != 'Cover Photos' and 'cover_photo' in album])
 
 @app.route('/gallery/album/<album_id>')
 def gallery_album(album_id):
-    graph = facebook.GraphAPI(app.config['FACEBOOK_APP_ID'] + '|' + app.config['FACEBOOK_APP_SECRET'])
-    album = graph.get_object(id=album_id, fields='name, photos{images}')
-    print(album)
+    limit = 100
+    graph = facebook.GraphAPI(access_token = app.config['FACEBOOK_PAGE_ACCESS_TOKEN'])
+    album = graph.get_object(id=album_id, limit=limit, fields='name, photos{images}')
     album['name_stripped'] = re.sub("\[([^]]+)\]", "", album['name'])
     for photo in album['photos']['data']:
         photo['medium_index'] = min(app.config['FACEBOOK_IMAGE_SIZE_INDEX'], len(photo['images']) - 1)
-    print(album)
+    print("After: {}".format(album['photos']['paging']['cursors']['after']))
     return render_template('album.html', album=album)
 
 @app.route('/events')
 def events():
-    credentials = google_get_credentials()
-    http = credentials.authorize(httplib2.Http())
-    service = discovery.build('calendar', 'v3', http=http)
-
-    now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
-    print('Getting the upcoming 10 events')
-    eventsResult = service.events().list(
-        calendarId=app.config['GOOGLE_CALENDAR_ID'], timeMin=now, maxResults=10, singleEvents=True,
-        orderBy='startTime').execute()
-    events = eventsResult.get('items', [])
+    events = gcal.get_events()
 
     for event in events:
         start_date = event['start'].get('date')
