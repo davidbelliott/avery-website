@@ -1,4 +1,3 @@
-from .app import app, socketio
+from .app import app
 from . import models
 from . import views
-from . import events

@@ -1,10 +1,15 @@
 from flask import Flask
-from flask_socketio import SocketIO
-import redis
+import subprocess
 
-app = Flask(__name__, instance_relative_config=True)
+app = Flask(__name__)
 app.config.from_pyfile('config.py')
+app.config.from_pyfile('instance/config.py', silent=True)
 
-socketio = SocketIO(app)
+def constitution_hook():
+    hook = app.config["CONSTITUTION_UPDATE_HOOK"]
+    if hook:
+        try:
+            subprocess.Popen(hook)
+        except FileNotFoundError:
+            pass
 
-strictredis = redis.StrictRedis(host='localhost', port=6379, db=0)
