@@ -1,13 +1,21 @@
 [Unit]
-Description=uWSGI instance to serve avery-website
-After=network.target
+Description=Avery Website Service
+Wants=network-online.target
+After=network-online.target
 
 [Service]
-User=ubuntu
+ExecStart=/usr/bin/uwsgi --ini /srv/avery-website/avery-website.ini
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStop=/bin/kill -INT $MAINPID
+Restart=always
+SuccessExitStatus=15 17 29 30
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+KillSignal=SIGQUIT
+ProtectSystem=full
+ProtectHome=True
+NoNewPrivileges=yes
+User=www-data
 Group=www-data
-WorkingDirectory=/home/ubuntu/avery-website
-Environment="PATH=/home/ubuntu/avery-website/venv/bin"
-ExecStart=/home/ubuntu/avery-website/venv/bin/uwsgi --ini avery-website.ini
-
-[Install]
-WantedBy=multi-user.target
+WorkingDirectory=/srv/avery-website
