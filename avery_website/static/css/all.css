@@ -16,10 +16,12 @@ body {
     font-weight: 300;
     letter-spacing: .01em;
     line-height: 1.6;
+    background-color: rgba(255, 255, 255, 0.8);
     background-image: url('../avery_bird2.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    background-blend-mode: overlay;
 }
 
 blockquote {
