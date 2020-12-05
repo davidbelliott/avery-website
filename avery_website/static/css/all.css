@@ -16,7 +16,7 @@ body {
     font-weight: 300;
     letter-spacing: .01em;
     line-height: 1.6;
-    background-image: url('avery_bird.jpg');
+    background-image: url('../avery_bird.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
