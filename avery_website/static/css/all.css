@@ -16,8 +16,6 @@ body {
     font-weight: 300;
     letter-spacing: .01em;
     line-height: 1.6;
-    background-color: rgba(255, 255, 255, 0.5);
-    background-blend-mode: overlay;
     background-image: url('../avery_bird2.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
