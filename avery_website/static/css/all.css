@@ -16,11 +16,12 @@ body {
     font-weight: 300;
     letter-spacing: .01em;
     line-height: 1.6;
-    background-color: rgba(255, 255, 255, 0.8);
-    background-image: url('../avery_bird2.png');
+    background-color: rgba(255, 255, 255, 0.85);
+    background-image: url('../avery_bird3.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover;
+    background-size: contain;
+    background-position: center;
     background-blend-mode: overlay;
 }
 
@@ -609,7 +610,6 @@ body {
     margin: 0;
     font-family: "Spectral", serif;
     font-size: 2.0rem;
-    background-color: #fff
 }
 
 h1 {
