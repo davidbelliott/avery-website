@@ -1,6 +1,9 @@
 # Constitution contents
 constitution-contents.html
 
+# Ignore large files
+*.mp4
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
