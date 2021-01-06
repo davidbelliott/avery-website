@@ -1,54 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-        {% block head %}
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Welcome{% endblock %} | Avery</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spectral">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:600">
-        {% endblock %}
-    </head>
-    <body>
-        <main class="wrapper">
+
+<head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"> {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Welcome{% endblock %} | Avery</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spectral">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:600"> {% endblock %}
+</head>
+
+<body>
+    <main class="wrapper">
+        <div class="container container-center">
+            <a href="{{ url_for('index') }}">
+                <img class="brand-logo" src="{{ url_for('static', filename='logo_purple.png')}}" alt="Avery logo">
+            </a>
+        </div>
+        <div class="navbar">
             <div class="container container-center">
-                <a href="{{ url_for('index') }}">
-                    <img class="brand-logo" src="{{ url_for('static', filename='logo_purple.png')}}" alt="Avery logo">
-                </a>
+                <a href="{{ url_for('index') }}">Home</a> |
+                <a href="https://www.facebook.com/pg/averyglory/photos">Facebook</a> |
+                <a href="https://www.instagram.com/avery.glory/">Instagram</a> |
+                <a href="{{ url_for('events') }}">Events</a> |
+                <a href="{{ url_for('constitution') }}">Constitution</a> |
+                <a href="{{ url_for('rotation_video') }}">Rotation Video</a>
             </div>
-            <div class="navbar">
-                <div class="container container-center">
-                    <a href="{{ url_for('index') }}">Home</a> |
-                    <a href="https://www.facebook.com/pg/averyglory/photos">Facebook</a> |
-                    <a href="https://www.instagram.com/avery.glory/">Instagram</a> |
-                    <a href="{{ url_for('events') }}">Events</a> |
-                    <a href="{{ url_for('constitution') }}">Constitution</a> |
-                </div>
-            </div>
-            {% block body %}
-            {% endblock %}
-        </main>
+        </div>
+        {% block body %} {% endblock %}
+    </main>
     <script type="text/javascript">
-    var wrapper = document.getElementsByClassName('wrapper')[0];
-    var navbar = document.getElementsByClassName('navbar')[0];
-    var fixed_navbar = navbar.cloneNode(true);
-    var is_fixed = false;
-    fixed_navbar.classList.add('navbar-fixed-top');
-    console.log('starting');
-    window.onscroll = function () { 
-        console.log(window.scrollY);
-        if (navbar.getBoundingClientRect().top < 0 && !is_fixed) {
-            wrapper.appendChild(fixed_navbar);
-            is_fixed = true;
-        }
-        else if (navbar.getBoundingClientRect().top >= 0 && is_fixed) {
-            wrapper.removeChild(fixed_navbar);
-            is_fixed = false;
-        }
-    };
+        var wrapper = document.getElementsByClassName('wrapper')[0];
+        var navbar = document.getElementsByClassName('navbar')[0];
+        var fixed_navbar = navbar.cloneNode(true);
+        var is_fixed = false;
+        fixed_navbar.classList.add('navbar-fixed-top');
+        console.log('starting');
+        window.onscroll = function() {
+            console.log(window.scrollY);
+            if (navbar.getBoundingClientRect().top < 0 && !is_fixed) {
+                wrapper.appendChild(fixed_navbar);
+                is_fixed = true;
+            } else if (navbar.getBoundingClientRect().top >= 0 && is_fixed) {
+                wrapper.removeChild(fixed_navbar);
+                is_fixed = false;
+            }
+        };
     </script>
-        {% block scripts %}
-        {% endblock %}
-    </body>
+    {% block scripts %} {% endblock %}
+</body>
